@@ -27,7 +27,7 @@ public class EscuelaApplication {
 		SpringApplication.run(EscuelaApplication.class, args);
 	}
 
-	@PostMapping("/salones/crear")
+	@PostMapping("/salones")
 	public int agregarSalon(@RequestBody Salon salon) {
 		salones.put(ultimoIntegerSalon, salon);
 
@@ -45,14 +45,14 @@ public class EscuelaApplication {
 		return salon;
 	}
 
-	@PutMapping("/salones/{numero}/modificar")
+	@PutMapping("/salones/{numero}")
 	public Salon modificarSalon(@PathVariable int numero, @RequestBody Salon nuevoSalon) {
 		salones.put(numero, nuevoSalon);
 
 		return salones.get(numero);
 	}
 
-	@DeleteMapping("/salones/{numero}/eliminar")
+	@DeleteMapping("/salones/{numero}")
 	public boolean eliminarSalon(@PathVariable int numero) {
 		Salon salonOriginal = salones.get(numero);
 		Salon salonResultado = salones.remove(salonOriginal);
@@ -77,7 +77,7 @@ public class EscuelaApplication {
 		return todos;
 	}
 	
-	@PostMapping("/salones/profesores/crear")
+	@PostMapping("/profesores")
 	public int agregarProfesor(@RequestBody Profesor profesor) {
 		profesores.put(ultimoIntegerProfesor, profesor);
 
@@ -88,21 +88,21 @@ public class EscuelaApplication {
 		return id;
 	}
 
-	@GetMapping("/salones/profesores/{numero}")
+	@GetMapping("/profesores/{numero}")
 	public Profesor listarProfe(@PathVariable int numero) {
 		Profesor profesor = profesores.get(numero);
 
 		return profesor;
 	}
 
-	@PutExchange("/salones/profesores/{numero}/modificar")
+	@PutExchange("/profesores/{numero}")
 	public Profesor modificarProfesor(@PathVariable int numero, @RequestBody Profesor nuevoProfesor) {
 		profesores.put(numero, nuevoProfesor);
 	
 		return profesores.get(numero);
 	}
 	
-	@DeleteMapping("/salones/profesores/{numero}/eliminar")
+	@DeleteMapping("/profesores/{numero}")
 	public boolean eliminarProfesor(@PathVariable int numero) {
 		Profesor profesorOriginal = profesores.get(numero);
 		Profesor profesorResultado = profesores.remove(profesorOriginal);
@@ -117,7 +117,7 @@ public class EscuelaApplication {
 		return eliminado;
 	}
 	
-	@GetMapping("/salones/profesores")
+	@GetMapping("/profesores")
 	public List<Profesor> mostrarProfesores() {
 		List<Profesor> todos = new ArrayList<Profesor>();
 		for (int i = 0; i < profesores.size(); i++) {
